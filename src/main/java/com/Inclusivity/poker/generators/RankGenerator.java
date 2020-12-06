@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RankGenerator {
 
-    public List<Rank> generateRanks(){
+    public static List<Rank>  generateRanks(){
         List<Rank> ranks = new ArrayList<>();
        ranks.add(new Rank("Ace","A"));
         ranks.add(new Rank("Two","2"));
