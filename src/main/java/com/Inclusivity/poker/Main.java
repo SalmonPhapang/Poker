@@ -3,10 +3,12 @@ package com.Inclusivity.poker;
 import com.Inclusivity.poker.generators.RankGenerator;
 import com.Inclusivity.poker.generators.SuitesGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,6 +39,17 @@ public class Main {
             }
 
         }
+
+        // find frequencies of each rank to determine pairs
+        Map<Rank, Long> rankFrequencies = cards.stream().collect(
+                Collectors.groupingBy(Card::getRank, Collectors.counting()));
+
+        // find frequencies of each suite to determine pairs
+        Map<Suite, Long> suitFrequencies = cards.stream().collect(
+                Collectors.groupingBy(Card::getSuite, Collectors.counting()));
+
+
+
         System.out.println(cards.toString());
     }
 
