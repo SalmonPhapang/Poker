@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SuitesGenerator {
+
     public List<Suite> generateSuite(){
         List<Suite> suites = new ArrayList<>();
         suites.add(new Suite("Spades","S"));
