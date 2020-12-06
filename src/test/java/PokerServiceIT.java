@@ -5,6 +5,7 @@ import com.Inclusivity.poker.Suite;
 import com.Inclusivity.poker.generators.RankGenerator;
 import com.Inclusivity.poker.generators.SuitesGenerator;
 import com.Inclusivity.poker.service.PokerService;
+import com.Inclusivity.poker.service.PokerServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class PokerServiceIT {
     private Map<Rank, Long> rankFrequencies;
     @Before
     public void init(){
-        pokerService = new PokerService();
+        pokerService = new PokerServiceImpl();
         suites = SuitesGenerator.generateSuite();
         ranks = RankGenerator.generateRanks();
         cards = new ArrayList<>();

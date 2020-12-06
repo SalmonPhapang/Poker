@@ -3,13 +3,14 @@ package com.Inclusivity.poker;
 import com.Inclusivity.poker.generators.RankGenerator;
 import com.Inclusivity.poker.generators.SuitesGenerator;
 import com.Inclusivity.poker.service.PokerService;
+import com.Inclusivity.poker.service.PokerServiceImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class Main {
-    private static PokerService pokerService = new PokerService();
+    private static PokerService pokerService = new PokerServiceImpl();
 
     public static void main(String[] args) {
         List<Suite> suites = SuitesGenerator.generateSuite();
