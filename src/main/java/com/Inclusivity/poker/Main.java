@@ -2,19 +2,19 @@ package com.Inclusivity.poker;
 
 import com.Inclusivity.poker.generators.RankGenerator;
 import com.Inclusivity.poker.generators.SuitesGenerator;
-
+import com.Inclusivity.poker.service.PokerService;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.*;
 
 public class Main {
+    private static PokerService pokerService = new PokerService();
+
     public static void main(String[] args) {
         List<Suite> suites = SuitesGenerator.generateSuite();
         List<Rank> ranks = RankGenerator.generateRanks();
         List<Card> cards = new ArrayList<>();
+        HandRanking handRanking;
         Scanner in = new Scanner(System.in);
         String handInput = in.nextLine();
        String[] hands = handInput.trim().split(",");
@@ -40,6 +40,7 @@ public class Main {
 
         }
 
+        Collections.sort(cards);
         // find frequencies of each rank to determine pairs
         Map<Rank, Long> rankFrequencies = cards.stream().collect(
                 Collectors.groupingBy(Card::getRank, Collectors.counting()));
@@ -48,10 +49,17 @@ public class Main {
         Map<Suite, Long> suitFrequencies = cards.stream().collect(
                 Collectors.groupingBy(Card::getSuite, Collectors.counting()));
 
+            handRanking = pokerService.findFlush(suitFrequencies);
 
+        if (handRanking.equals(HandRanking.NONE))
+            handRanking = pokerService.findOfKinds(rankFrequencies);
 
-        System.out.println(cards.toString());
+        if (handRanking.equals(HandRanking.NONE))
+            handRanking = pokerService.findPairs(rankFrequencies);
+
+        System.out.println(handRanking);
     }
+
 
     private static void extractIntoCard(List<Suite> suites, List<Rank> ranks, List<Card> cards, String lastCharacter, String[] splitHands) {
         Optional<Rank> optionalRank = ranks.stream().filter(rank -> rank.getSymbol().equalsIgnoreCase(splitHands[0].trim())).findFirst();
