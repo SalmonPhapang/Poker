@@ -1,5 +1,5 @@
 # Poker
-For this Application, takes in a text input of playing cards and evaluating what the best poker
+This Application, takes in a text input of playing cards and evaluating what the best poker
 hand could be constructed with the cards.
 For example, given a string input of:
 'AS, 10C, 10H, 3D, 3S'
